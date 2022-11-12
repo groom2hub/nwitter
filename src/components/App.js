@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <AppRouter isLoggedIn={isLoggedIn} />
-      <footer>&copy; {new Date().getFullYear()} Nwtter</footer>
+      <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
     </>
-  );
+  )
 }
 
 export default App;
