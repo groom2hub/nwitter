@@ -16,7 +16,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     return(
         <div>
             <h4>{nweetObj.text}</h4>
-            {isOwner && (
+            { nweetObj.creatorId === isOwner && (
                 <>
                     <button onClick={onDeleteClick} >Delete Nweet</button>
                     <button>Edit Nweet</button>
