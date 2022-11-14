@@ -83,6 +83,7 @@ const Home = ({ userObj }) => {
           <input type="submit" value="Nweet" />
         </form>
           <div>
+            {/* 트윗이 하나도 없을 경우 */}
            { nweets.length === 0
             ? <li>이 앱은 망한 앱입니다</li>
              : nweets.map((nweets) => (
