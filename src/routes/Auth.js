@@ -5,8 +5,6 @@ import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider} from "firebase
 import { useState } from "react";
 import { async } from "@firebase/util";
 
-  
-
 const Auth = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
