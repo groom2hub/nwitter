@@ -1,12 +1,12 @@
 import { authService } from "../fbase";
-// import { useNavigate }from "react-router-dom";
+import { useNavigate }from "react-router-dom";
 
 const Profile = () => {
-    // const History = useNavigate();
+    const History = useNavigate();
 
     const onLogOutClick = () => {
         authService.signOut();
-        // History.pushState("/");
+        History.pushState("/");
     };
 
     return (

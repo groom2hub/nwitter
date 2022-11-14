@@ -4,7 +4,7 @@ import { authService } from "../fbase";
 
 function App() {
   const [ init, setInit ] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-     {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "initalizing..."}
+    {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "initalizing..."}
       <footer>&copy; {new Date().getFullYear()} Nwitter </footer>
     </>
   );

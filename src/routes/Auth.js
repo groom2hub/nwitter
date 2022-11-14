@@ -1,7 +1,11 @@
 import React from "react";
 import { authService, firebaseInstance } from "../fbase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword,} from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider} from "firebase/auth";
 import { useState } from "react";
 import { async } from "@firebase/util";
+
+  
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -26,10 +30,10 @@ const Auth = () => {
             let data;
             if (newAccount){
                 // create Account
-                data = await authService.createUserWithEmailAndPassword(email, password);
+                data = await createUserWithEmailAndPassword(authService, email, password);
             } else {
                 // log in
-                data = await authService.signInWithEmailAndPassword(email, password);
+                data = await signInWithEmailAndPassword(authService, email, password);
             }
             console.log(data);
         } catch (error) {
@@ -45,11 +49,11 @@ const Auth = () => {
         } = event;
         let provider;
         if (name === "google") {
-            provider = new firebaseInstance.auth.GoogleAuthProvider();
+            provider = new GoogleAuthProvider();;
         } else if (name === "github") {
-            provider = new firebaseInstance.auth.GithubAuthProvider();
+            provider = new GithubAuthProvider();
         }
-        const data = await authService.signInWithPopup(provider);
+        const data = await signInWithPopup(authService, provider);
         console.log(data);
     };
 
