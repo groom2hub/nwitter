@@ -9,12 +9,12 @@ import Navigation from "./Navigation";
 const AppRouter = ({ isLoggedIn, userObj }) => {
     return(
         <Router>
-            {isLoggedIn && <Navigation />}
+            {isLoggedIn && <Navigation userObj={userObj} />}
             <Routes>
                 {isLoggedIn ? (
                     <>
                         <Route exact path="/" element={ <Home userObj={userObj} /> } />,
-                        <Route exact path="/profile" element={ <Profile /> } />
+                        <Route exact path="/profile" element={ <Profile userObj={userObj} /> } />
                     </>
                 ) : (
                     <Route exact path="/" element={ <Auth /> } />

@@ -33,7 +33,7 @@ const Home = ({ userObj }) => {
 
     const q = query(
       collection(dbService, "nweets"),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "asc")
     );
     
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
