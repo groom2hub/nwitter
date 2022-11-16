@@ -22,6 +22,7 @@ function App() {
     });
   }, []);
 
+  // User 정보 새로고침
   const refreshUser = () => {
     const user = authService.currentUser;
     setUserObj({
