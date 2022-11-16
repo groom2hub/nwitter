@@ -1,24 +1,26 @@
 import { async } from "@firebase/util";
 import { deleteDoc, updateDoc, doc } from "firebase/firestore"
-import { dbService } from "../fbase";
+import { getStorage, ref, deleteObject } from "firebase/storage";
+import { dbService, storageService } from "../fbase";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState(nweetObj.text);
 
-    // Delete Nweet
+    // Delete Nweet, attachment
     const onDeleteClick = async () => {
         const ok = window.confirm("삭제하시겠습니까?");
-        console.log(ok);
         if (ok) {
-            console.log(nweetObj.id);
-            const data = deleteDoc(doc(dbService, "nweets", nweetObj.id));
-            console.log(data);
+            deleteDoc(doc(dbService, "nweets", nweetObj.id));
+            if (nweetObj.attachmentUrl !== ""){
+                const deleteRef = ref(storageService, nweetObj.attachmentUrl);
+                deleteObject(deleteRef).then();
+            }
         }
     };
 
-    // const toggleEditing = () => setEditing((prev) => !prev);
     const toggleEditing = () => setEditing((prev) => !prev);
 
     //Edit Nweet 입력란
@@ -49,8 +51,11 @@ const Nweet = ({ nweetObj, isOwner }) => {
                 </>
             ) : (
                 <>
-                    {/*Display Nweet and Nweet Button*/}
-                    <h4>{nweetObj.text}</h4>
+                    {/*Display Nweet, attachment*/}
+                    <h4>1:{nweetObj.text}</h4>
+                    {nweetObj.attachmentUrl && (
+                        <img src={nweetObj.attachmentUrl} width="50px" height="50" />
+                    )}
                     { nweetObj.creatorId === isOwner && (
                         <>
                             <button onClick={onDeleteClick} >Delete Nweet</button>
