@@ -31,7 +31,7 @@ const Home = ({ userObj }) => {
 
     const q = query(
       collection(dbService, "nweets"),
-      orderBy("createdAt", "asc")
+      orderBy("createdAt", "desc")
     );
     
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -49,9 +49,9 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <NweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {/* 트윗이 하나도 없을 경우 */}
         { nweets.length === 0
           ? <li>이 앱은 망한 앱입니다</li>
@@ -60,7 +60,7 @@ const Home = ({ userObj }) => {
           ))
         }
       </div>
-    </>
+    </div>
   );
 };
 
