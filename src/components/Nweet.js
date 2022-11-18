@@ -61,9 +61,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
             ) : (
                 <>
                     {/*Display Nweet, attachment*/}
+                    <h1>{nweetObj.displayName}</h1> {/* displayName */}
                     <h4>{nweetObj.text}</h4>
                     {nweetObj.attachmentUrl && (
-                        <img src={nweetObj.attachmentUrl} width="50px" height="50" />
+                        <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
                     )}
                     { nweetObj.creatorId === isOwner && (
                         <div className="nweet_actions">
