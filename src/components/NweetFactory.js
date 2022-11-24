@@ -8,7 +8,8 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const NweetFactory = ({ userObj }) => {
     const [nweet, setNweet] = useState("");
-    const [attachment, setAttachment] =useState("");
+    const [attachment, setAttachment] = useState("");
+    const [likeIt, setLikeIt] = useState(0);
     
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -29,6 +30,7 @@ const NweetFactory = ({ userObj }) => {
           creatorId: userObj.uid,
           attachmentUrl,
           displayName: userObj.displayName,
+          likeIt,
         });
         setNweet("");
         setAttachment("");
