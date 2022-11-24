@@ -71,7 +71,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
             ) : (
                 <>
                     {/*Display Nweet, attachment*/}
-                    <h1>{nweetObj.displayName}</h1> {/* displayName */}
+                    <h1>{nweetObj.displayName}</h1>
                     <h4>{nweetObj.text}</h4>
                     <h2>+{nweetObj.likeIt}</h2>
                     {nweetObj.attachmentUrl && (
@@ -84,9 +84,6 @@ const Nweet = ({ nweetObj, isOwner }) => {
                             </span>
                             <span onClick={toggleEditing} >
                                 <FontAwesomeIcon icon={faPencilAlt} />
-                            </span>
-                            <span onClick={onlikeItClick} >
-                                <FontAwesomeIcon icon={faHeart} />
                             </span>
                         </div>
                     
