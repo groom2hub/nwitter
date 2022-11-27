@@ -73,7 +73,6 @@ const Nweet = ({ nweetObj, isOwner }) => {
                     {/*Display Nweet, attachment*/}
                     <h1>{nweetObj.displayName}</h1>
                     <h4>{nweetObj.text}</h4>
-                    <h2>+{nweetObj.likeIt}</h2>
                     {nweetObj.attachmentUrl && (
                         <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
                     )}
@@ -86,11 +85,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
                                 <FontAwesomeIcon icon={faPencilAlt} />
                             </span>
                         </div>
-                    
                     )) || (
                         // 자신의 nweet일때 좋아요 불가
                         <span onClick={onlikeItClick} >
-                            <FontAwesomeIcon icon={faHeart} />
+                            <FontAwesomeIcon icon={faHeart} /> +{nweetObj.likeIt} 
                         </span>
                     )}
                 </>
