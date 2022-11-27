@@ -41,11 +41,15 @@ const Nweet = ({ nweetObj, isOwner }) => {
 
     // 좋아요 입력값 반영
     const onlikeItClick = async () => {
-        const ok = window.confirm("좋아요를 누르시겠습니까?");
-        if (ok) {
-            updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt + 1 });
+        if(nweetObj.creatorId !== isOwner){
+            const ok = window.confirm("좋아요를 누르시겠습니까?");
+            if (ok) {
+                updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt + 1 });
+            }
+            setLikeIt(0);
+        } else {
+            window.alert("자신의 트윗에 좋아요를 누를 수 없습니다.");
         }
-        setLikeIt(0);
     };
 
     return(
@@ -77,7 +81,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
                         <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
                     )}
                     { (nweetObj.creatorId === isOwner && (
-                        <div className="nweet_actions">
+                        <div className="nweet__actions">
+                            <span onClick={onlikeItClick} >
+                                <FontAwesomeIcon icon={faHeart} /> {nweetObj.likeIt} 
+                            </span>
                             <span onClick={onDeleteClick} >
                                 <FontAwesomeIcon icon={faTrash} />
                             </span>
@@ -87,9 +94,11 @@ const Nweet = ({ nweetObj, isOwner }) => {
                         </div>
                     )) || (
                         // 자신의 nweet일때 좋아요 불가
-                        <span onClick={onlikeItClick} >
-                            <FontAwesomeIcon icon={faHeart} /> +{nweetObj.likeIt} 
-                        </span>
+                        <div className="nweet__actions">
+                            <span onClick={onlikeItClick} >
+                                <FontAwesomeIcon icon={faHeart} /> {nweetObj.likeIt} 
+                            </span>
+                        </div>
                     )}
                 </>
             )}

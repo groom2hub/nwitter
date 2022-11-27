@@ -218,6 +218,7 @@ form {
 
 .nweet__actions span {
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .nweet__actions span:first-child {
