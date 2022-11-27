@@ -18,6 +18,7 @@ const NweetFactory = ({ userObj }) => {
         }
         // Upload and Display attachment
         let attachmentUrl = "";
+        let likeItuserId = [];
         if (attachment !== "") {
           const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
           const response = await uploadString(attachmentRef, attachment, "data_url");
@@ -31,6 +32,7 @@ const NweetFactory = ({ userObj }) => {
           attachmentUrl,
           displayName: userObj.displayName,
           likeIt,
+          likeItuserId,
         });
         setNweet("");
         setAttachment("");
