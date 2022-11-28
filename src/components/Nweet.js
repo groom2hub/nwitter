@@ -42,18 +42,21 @@ const Nweet = ({ nweetObj, isOwner }) => {
 
     // 좋아요
     const onlikeItClick = async () => {
-        if(nweetObj.creatorId !== isOwner) {
-            const ok = window.confirm("좋아요를 누르시겠습니까?");
-            if (ok) {
-                console.log("id ", isOwner);
-                console.log(nweetObj.likeItuserId.includes(isOwner.id));
-                if((nweetObj.likeItuserId.includes(isOwner))) {
-                    window.alert("이미 좋아요를 누르셨습니다.");
-                } else {
-                    window.alert("좋아요");
+        if (nweetObj.creatorId !== isOwner) {
+            if (nweetObj.likeItuserId.includes(isOwner)) {
+                const likeItCancel = window.confirm("좋아요를 취소하겠습니까?");
+                if (likeItCancel) {
+                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt - 1 });
+                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayRemove(isOwner) });
+                    window.alert("좋아요가 취소되었습니다.");
+                }
+            } else {
+                const likeItOk = window.confirm("좋아요를 누르시겠습니까?");
+                if (likeItOk) {
                     await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt + 1 });
                     await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayUnion(isOwner) });
-                } 
+                    window.alert("좋아요");
+                }
             }
             setLikeIt(0)
         } else {
