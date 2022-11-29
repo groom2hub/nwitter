@@ -56,7 +56,7 @@ const Home = ({ userObj }) => {
         { nweets.length === 0
           ? <li>이 앱은 망한 앱입니다</li>
           : nweets.map((nweets) => (
-            <Nweet key={nweet.id} nweetObj={nweets} isOwner={userObj.uid} />
+            <Nweet key={nweet.id} nweetObj={nweets} isOwner={userObj} />
           ))
         }
       </div>

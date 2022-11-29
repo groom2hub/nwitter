@@ -42,19 +42,19 @@ const Nweet = ({ nweetObj, isOwner }) => {
 
     // 좋아요
     const onlikeItClick = async () => {
-        if (nweetObj.creatorId !== isOwner) {
-            if (nweetObj.likeItuserId.includes(isOwner)) {
+        if (nweetObj.creatorId !== isOwner.uid) {
+            if (nweetObj.likeItuserId.includes(isOwner.uid)) {
                 const likeItCancel = window.confirm("좋아요를 취소하겠습니까?");
                 if (likeItCancel) {
                     await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt - 1 });
-                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayRemove(isOwner) });
+                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayRemove(isOwner.uid) });
                     window.alert("좋아요가 취소되었습니다.");
                 }
             } else {
                 const likeItOk = window.confirm("좋아요를 누르시겠습니까?");
                 if (likeItOk) {
                     await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeIt: nweetObj.likeIt + 1 });
-                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayUnion(isOwner) });
+                    await updateDoc(doc(dbService, "nweets", nweetObj.id), { likeItuserId: arrayUnion(isOwner.uid) });
                     window.alert("좋아요");
                 }
             }
@@ -93,10 +93,10 @@ const Nweet = ({ nweetObj, isOwner }) => {
                     {nweetObj.attachmentUrl && (
                         <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
                     )}
-                    { (nweetObj.creatorId === isOwner && (
+                    { (nweetObj.creatorId === isOwner.uid && (
                         <div className="nweet__actions">
                             <span onClick={onlikeItClick} >
-                                { (nweetObj.likeItuserId.includes(isOwner)) 
+                                { (nweetObj.likeItuserId.includes(isOwner.uid)) 
                                     ? ( <FontAwesomeIcon icon={faHeart} />  )
                                     : ( <FontAwesomeIcon icon={regular_faHeart} />  ) 
                                 }
@@ -113,7 +113,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
                         // 자신의 nweet일때 좋아요 불가
                         <div className="nweet__actions">
                             <span onClick={onlikeItClick} >
-                                { (nweetObj.likeItuserId.includes(isOwner)) 
+                                { (nweetObj.likeItuserId.includes(isOwner.uid)) 
                                     ? ( <FontAwesomeIcon icon={faHeart} /> )
                                     : ( <FontAwesomeIcon icon={regular_faHeart} /> ) 
                                 }
