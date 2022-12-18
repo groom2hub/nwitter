@@ -1,0 +1,17 @@
+# docker-compose version
+version: "3.8"
+
+# container to compose
+services:
+  react:
+    build: # 현재 위치(context .)에서 dockerfile bulid
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: # react app default port
+      - "3000:3000" 
+    volumes: # 디렉토리 연결
+      - /usr/src/app/node_modules 
+      - ./:/usr/src/app
+    environment:
+      - NODE_ENV=development
+    stdin_open: true

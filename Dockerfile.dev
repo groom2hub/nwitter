@@ -1,0 +1,17 @@
+# base image
+FROM node:alpine
+
+# 작업 디렉토리 이동
+WORKDIR "/usr/src/app"
+
+COPY package.json ./
+COPY package-lock.json ./
+
+# install package
+RUN npm install
+RUN npm install react-scripts@5.0.1 -g
+
+COPY . ./
+
+# 이미지를 컨테이너로 띄울 때 디폴트 실행 커멘드
+CMD ["npm", "run", "start"]
